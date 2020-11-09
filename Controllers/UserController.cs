@@ -48,7 +48,7 @@ namespace Qlity.Controllers
         [Route("api/User/LoginUser")]
         public HttpResponseMessage LoginUser(string email,string password)
         {
-            db.Users.SqlQuery("");
+           db.Users.SqlQuery("");
             HttpResponseMessage res = new HttpResponseMessage();
             return res;
         }
