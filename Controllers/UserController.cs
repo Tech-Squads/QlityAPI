@@ -13,13 +13,43 @@ namespace Qlity.Controllers
     {
         DatabaseContext db = new DatabaseContext();
 
+
+
+        [Route("UserLogon")]
+        public User UserLogin(User u)
+        {
+            try
+            {
+               List<User> Users = db.Users.ToList();
+
+                foreach (User user in Users)
+                {
+                   if(user.uEmail == u.uEmail && user.uPassword == u.uPassword)
+                    {
+                        return user;
+                    } 
+                }
+                return null; 
+            }
+            catch (Exception)
+            {
+
+                HttpResponseMessage res = new HttpResponseMessage(HttpStatusCode.InternalServerError);
+                return null;
+            }
+        }
+
+
+
         [Route("api/User/GetUserByID/{id?}")]
         public User GetUserByID(int? id)
         {
             return db.Users.Find(id);
         }
 
-        [Route("api/User/GetAllUsers")]
+
+
+        [Route("GetAllUsers")]
         public IEnumerable<User> GetAllUsers()
         {
             return db.Users.ToList();
@@ -44,19 +74,19 @@ namespace Qlity.Controllers
             }
         }
 
-        [HttpGet]
-        [Route("api/User/LoginUser")]
-        public HttpResponseMessage LoginUser(string email,string password)
-        {
-           db.Users.SqlQuery("");
-            HttpResponseMessage res = new HttpResponseMessage();
-            return res;
-        }
+        
 
         [HttpPost]
-        [Route("api/User/AddProfile")]
-        public HttpResponseMessage CreateUserProfile(Profile pro)
+        [Route("api/User/AddRequestorProfile")]
+        public HttpResponseMessage CreateUserRProfile(Profile pro)
         {
+            pro.uEducation = "null";
+            pro.uReferences = "null";
+            pro.uSkills = "null";
+            pro.uPastProjectDetails = "null";
+            pro.uPastProjectDuration = "null";
+            pro.uPastProjectName = "null";
+            
             try
             {
                 db.Profiles.Add(pro);
@@ -72,25 +102,41 @@ namespace Qlity.Controllers
             }
         }
 
+        [HttpPost]
+        [Route("api/User/AddGiggerProfile")]
+        public HttpResponseMessage CreateUserGProfile(Profile pro)
+        {
+            pro.uCompany = "null";
+
+
+            try
+            {
+                db.Profiles.Add(pro);
+                db.SaveChanges();
+                HttpResponseMessage resp = new HttpResponseMessage(HttpStatusCode.Created);
+                return resp;
+            }
+            catch (Exception)
+            {
+                HttpResponseMessage reps = new HttpResponseMessage(HttpStatusCode.InternalServerError);
+
+                return reps;
+            }
+        }
+
         [HttpPut]
         [Route ("api/User/UpdateUserProfile")]
-        public HttpResponseMessage UpdateUserProfile(int id,Profile pro)
+        public HttpResponseMessage UpdateUserProfile(Profile pro)
         {
             try
             {
               
-                if (id == pro.UserID)
-                {
                     db.Entry(pro).State = System.Data.Entity.EntityState.Modified;
                     db.SaveChanges();
                     HttpResponseMessage resp = new HttpResponseMessage(HttpStatusCode.OK);
                     return resp;
-                }
-                else
-                {
-                    HttpResponseMessage res = new HttpResponseMessage(HttpStatusCode.NotModified);
-                    return res;
-                }
+                
+                 
             }
             catch (Exception)
             {
@@ -103,22 +149,17 @@ namespace Qlity.Controllers
 
         [HttpPut]
         [Route ("api/User/UpdateUser")]
-        public HttpResponseMessage UpdateUser(int id, User u)
+        public HttpResponseMessage UpdateUser(User u)
         {
             try
             {
-                if (id == u.UserID)
-                {
+                
                     db.Entry(u).State = System.Data.Entity.EntityState.Modified;
                     db.SaveChanges();
                     HttpResponseMessage resp = new HttpResponseMessage(HttpStatusCode.OK);
                     return resp;
-                }
-                else
-                {
-                    HttpResponseMessage res = new HttpResponseMessage(HttpStatusCode.NotModified);
-                    return res;
-                }
+                
+                
             }
             catch (Exception)
             {

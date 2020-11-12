@@ -15,19 +15,16 @@ namespace Qlity.Models
         public int uType { get; set; }
         public string FirstLogin { get; set; }
 
-        public User()
-        {
-
-        }
-
         public User(User u)
         {
-            this.UserID = u.UserID;
             this.uEmail = u.uEmail;
             this.uPassword = u.uPassword;
-            this.FirstLogin = u.FirstLogin;
-            this.uType = u.uType;
-            
         }
+        public User()
+        {
+                
+        }
+
+
     }
 }
