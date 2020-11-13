@@ -20,16 +20,16 @@ namespace Qlity.Controllers
         {
             try
             {
-               List<User> Users = db.Users.ToList();
+                List<User> Users = db.Users.ToList();
 
                 foreach (User user in Users)
                 {
-                   if(user.uEmail == u.uEmail && user.uPassword == u.uPassword)
+                    if (user.uEmail == u.uEmail && user.uPassword == u.uPassword)
                     {
                         return user;
-                    } 
+                    }
                 }
-                return null; 
+                return null;
             }
             catch (Exception)
             {
@@ -55,6 +55,13 @@ namespace Qlity.Controllers
             return db.Users.ToList();
         }
 
+        [Route("GetAllGigs")]
+        public IEnumerable<Gig> GetAllGigs()
+        {
+            return db.Gigs.ToList();
+        }
+
+
         [HttpPost]
         [Route("api/User/AddUser")]
         public HttpResponseMessage CreateUser(User u)
@@ -74,7 +81,26 @@ namespace Qlity.Controllers
             }
         }
 
-        
+        [HttpPost]
+        [Route("AddGig")]
+        public HttpResponseMessage CreateGig(Gig g)
+        {
+            try
+            {
+                db.Gigs.Add(g);
+                db.SaveChanges();
+                HttpResponseMessage resp = new HttpResponseMessage(HttpStatusCode.Created);
+                return resp;
+            }
+            catch (Exception)
+            {
+                HttpResponseMessage reps = new HttpResponseMessage(HttpStatusCode.InternalServerError);
+
+                return reps;
+            }
+        }
+
+
 
         [HttpPost]
         [Route("api/User/AddRequestorProfile")]
@@ -86,12 +112,12 @@ namespace Qlity.Controllers
             pro.uPastProjectDetails = "null";
             pro.uPastProjectDuration = "null";
             pro.uPastProjectName = "null";
-            
+
             try
             {
                 db.Profiles.Add(pro);
                 db.SaveChanges();
-                HttpResponseMessage resp = new HttpResponseMessage(HttpStatusCode.Created) ;
+                HttpResponseMessage resp = new HttpResponseMessage(HttpStatusCode.Created);
                 return resp;
             }
             catch (Exception)
@@ -125,18 +151,18 @@ namespace Qlity.Controllers
         }
 
         [HttpPut]
-        [Route ("api/User/UpdateUserProfile")]
+        [Route("api/User/UpdateUserProfile")]
         public HttpResponseMessage UpdateUserProfile(Profile pro)
         {
             try
             {
-              
-                    db.Entry(pro).State = System.Data.Entity.EntityState.Modified;
-                    db.SaveChanges();
-                    HttpResponseMessage resp = new HttpResponseMessage(HttpStatusCode.OK);
-                    return resp;
-                
-                 
+
+                db.Entry(pro).State = System.Data.Entity.EntityState.Modified;
+                db.SaveChanges();
+                HttpResponseMessage resp = new HttpResponseMessage(HttpStatusCode.OK);
+                return resp;
+
+
             }
             catch (Exception)
             {
@@ -148,18 +174,18 @@ namespace Qlity.Controllers
 
 
         [HttpPut]
-        [Route ("api/User/UpdateUser")]
+        [Route("api/User/UpdateUser")]
         public HttpResponseMessage UpdateUser(User u)
         {
             try
             {
-                
-                    db.Entry(u).State = System.Data.Entity.EntityState.Modified;
-                    db.SaveChanges();
-                    HttpResponseMessage resp = new HttpResponseMessage(HttpStatusCode.OK);
-                    return resp;
-                
-                
+
+                db.Entry(u).State = System.Data.Entity.EntityState.Modified;
+                db.SaveChanges();
+                HttpResponseMessage resp = new HttpResponseMessage(HttpStatusCode.OK);
+                return resp;
+
+
             }
             catch (Exception)
             {

@@ -9,6 +9,7 @@ namespace Qlity.Models
     {
         public int GigID { get; set; }
         public string GigTitle { get; set; }
+        public string DueDate { get; set; }
         public string GigDescription { get; set; }
         public string RequiredSkills { get; set; }
         public string ContactDetails { get; set; }
