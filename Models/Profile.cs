@@ -8,6 +8,7 @@ namespace Qlity.Models
     public class Profile
     {
         public int ProfileID { get; set; }
+        public int userID { get; set; }
         public string uName { get; set; }
         public string uSurname { get; set; }
         public string uCountry { get; set; }
@@ -18,7 +19,8 @@ namespace Qlity.Models
         public string uPastProjectName { get; set; }
         public string uPastProjectDuration { get; set; }
         public string uPastProjectDetails { get; set; }
-        public int UserID { get; set; }
+     
+        
 
         public Profile(Profile pro)
         {
@@ -32,7 +34,9 @@ namespace Qlity.Models
             this.uPastProjectName = pro.uPastProjectName;
             this.uPastProjectDuration = pro.uPastProjectDuration;
             this.uPastProjectDetails = pro.uPastProjectDetails;
-            this.UserID = pro.UserID;
+            this.userID = pro.userID;
+
+
         }
         public Profile()
         {

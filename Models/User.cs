@@ -9,11 +9,12 @@ namespace Qlity.Models
 
     public class User
     {
+        public int UserID { get; set; }
         public string uEmail { get; set; }
         public string  uPassword { get; set; }
-        public int UserID { get; set; }
         public int uType { get; set; }
         public string FirstLogin { get; set; }
+        public string HasGig { get; set; }
 
         public User(User u)
         {
