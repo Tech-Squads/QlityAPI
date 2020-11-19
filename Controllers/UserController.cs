@@ -40,6 +40,7 @@ namespace Qlity.Controllers
             return db.Users.Find(id);
         }
 
+
         [Route("GetUserProfile/{id?}")]
         public Profile GetProfileByID(int? id)
         {
@@ -132,14 +133,13 @@ namespace Qlity.Controllers
 
         [HttpPut]
         [Route("UpdateUserProfile/{id}")]
-        public HttpResponseMessage UpdateUserProfile(int id,Profile pro)
+        public HttpResponseMessage UpdateUserProfile(int id, Profile pro)
         {
             try
             {
-                if (pro.ProfileID == pro.ProfileID)
+                if (id == pro.userID)
                 {
                     db.Entry(pro).State = System.Data.Entity.EntityState.Modified;
-
                     db.SaveChanges();
                     HttpResponseMessage resp = new HttpResponseMessage(HttpStatusCode.OK);
                     return resp;
@@ -150,7 +150,6 @@ namespace Qlity.Controllers
             catch (Exception)
             {
                 HttpResponseMessage reps = new HttpResponseMessage(HttpStatusCode.InternalServerError);
-
                 return reps;
             }
         }
