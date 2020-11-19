@@ -11,27 +11,93 @@ namespace Qlity.Controllers
 {
     public class UserController : ApiController
     {
-        DatabaseContext db = new DatabaseContext();
+          DatabaseContext db = new DatabaseContext();
 
-        [Route("api/User/GetUserByID/{id?}")]
+
+        [HttpGet]
+        [Route("UserLogon")]
+        public User UserLogin(string Uemail,string Upassword)
+        {
+            try
+            {
+                var LoggedUser = db.Users.Where(us => us.uEmail == Uemail && us.uPassword == Upassword).FirstOrDefault<User>();
+                return LoggedUser;
+            }
+            
+            catch (Exception)
+            {
+
+                HttpResponseMessage res = new HttpResponseMessage(HttpStatusCode.InternalServerError);
+                return null;
+            }
+        }
+
+
+
+        [Route("GetUserByID/{id?}")]
         public User GetUserByID(int? id)
         {
             return db.Users.Find(id);
         }
 
-        [Route("api/User/GetAllUsers")]
+
+        [Route("GetUserProfile/{id?}")]
+        public Profile GetProfileByID(int? id)
+        {
+            var profi = db.Profiles.Where(p => p.userID == id).FirstOrDefault<Profile>();
+            return profi; 
+        }
+
+        
+
+        [Route("GetGigByID/{id?}")]
+        public Gig GetGigByID(int? id)
+        {
+            return db.Gigs.Find(id);
+        }
+
+
+        [Route("GetAllUsers")]
         public IEnumerable<User> GetAllUsers()
         {
             return db.Users.ToList();
         }
 
+        [Route("GetAllGigs")]
+        public IEnumerable<Gig> GetAllGigs()
+        {
+            return db.Gigs.ToList();
+        }
+
+
         [HttpPost]
-        [Route("api/User/AddUser")]
+        [Route("AddUser")]
         public HttpResponseMessage CreateUser(User u)
+        {
+         
+            try
+            {
+
+                db.Users.Add(u);
+                db.SaveChanges();
+                HttpResponseMessage resp = new HttpResponseMessage(HttpStatusCode.Created);
+                return resp;
+
+            }
+            catch (Exception)
+            {
+                HttpResponseMessage resp = new HttpResponseMessage(HttpStatusCode.InternalServerError);
+                return resp;
+            }
+        }
+
+        [HttpPost]
+        [Route("AddGig")]
+        public HttpResponseMessage CreateGig(Gig g)
         {
             try
             {
-                db.Users.Add(u);
+                db.Gigs.Add(g);
                 db.SaveChanges();
                 HttpResponseMessage resp = new HttpResponseMessage(HttpStatusCode.Created);
                 return resp;
@@ -44,81 +110,70 @@ namespace Qlity.Controllers
             }
         }
 
-        [HttpGet]
-        [Route("api/User/LoginUser")]
-        public HttpResponseMessage LoginUser(string email,string password)
-        {
-            db.Users.SqlQuery("");
-            HttpResponseMessage res = new HttpResponseMessage();
-            return res;
-        }
 
-        [HttpPost]
-        [Route("api/User/AddProfile")]
-        public HttpResponseMessage CreateUserProfile(Profile pro)
+
+        [Route("AddProfile")]
+        public HttpResponseMessage CreateUProfile(Profile pro)
         {
             try
             {
                 db.Profiles.Add(pro);
                 db.SaveChanges();
-                HttpResponseMessage resp = new HttpResponseMessage(HttpStatusCode.Created) ;
+                HttpResponseMessage resp = new HttpResponseMessage(HttpStatusCode.Created);
                 return resp;
             }
             catch (Exception)
             {
                 HttpResponseMessage reps = new HttpResponseMessage(HttpStatusCode.InternalServerError);
-
                 return reps;
             }
         }
 
+        
+
         [HttpPut]
-        [Route ("api/User/UpdateUserProfile")]
-        public HttpResponseMessage UpdateUserProfile(int id,Profile pro)
+        [Route("UpdateUserProfile/{id}")]
+        public HttpResponseMessage UpdateUserProfile(int id, Profile pro)
         {
             try
             {
-              
-                if (id == pro.UserID)
+                if (id == pro.userID)
                 {
                     db.Entry(pro).State = System.Data.Entity.EntityState.Modified;
                     db.SaveChanges();
                     HttpResponseMessage resp = new HttpResponseMessage(HttpStatusCode.OK);
                     return resp;
                 }
-                else
-                {
-                    HttpResponseMessage res = new HttpResponseMessage(HttpStatusCode.NotModified);
-                    return res;
-                }
+                HttpResponseMessage r = new HttpResponseMessage(HttpStatusCode.BadRequest);
+                return r;
             }
             catch (Exception)
             {
                 HttpResponseMessage reps = new HttpResponseMessage(HttpStatusCode.InternalServerError);
-
                 return reps;
             }
         }
 
 
         [HttpPut]
-        [Route ("api/User/UpdateUser")]
-        public HttpResponseMessage UpdateUser(int id, User u)
+        [Route("UpdateUser/{id}")]
+        public HttpResponseMessage UpdateUser(int id, User updateUser)
         {
             try
             {
-                if (id == u.UserID)
+                if(id == updateUser.UserID)
                 {
-                    db.Entry(u).State = System.Data.Entity.EntityState.Modified;
+                    db.Entry(updateUser).State = System.Data.Entity.EntityState.Modified;
                     db.SaveChanges();
                     HttpResponseMessage resp = new HttpResponseMessage(HttpStatusCode.OK);
                     return resp;
                 }
                 else
                 {
-                    HttpResponseMessage res = new HttpResponseMessage(HttpStatusCode.NotModified);
-                    return res;
+                    HttpResponseMessage r = new HttpResponseMessage(HttpStatusCode.NotModified);
+                    return r;
                 }
+                
             }
             catch (Exception)
             {

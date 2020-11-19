@@ -109,7 +109,12 @@
     <Compile Include="Migrations\202011090952452_3rdMigration.designer.cs">
       <DependentUpon>202011090952452_3rdMigration.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202011122101254_FourthMigrate.cs" />
+    <Compile Include="Migrations\202011122101254_FourthMigrate.designer.cs">
+      <DependentUpon>202011122101254_FourthMigrate.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\Gig.cs" />
     <Compile Include="Models\Profile.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -132,6 +137,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202011090952452_3rdMigration.resx">
       <DependentUpon>202011090952452_3rdMigration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202011122101254_FourthMigrate.resx">
+      <DependentUpon>202011122101254_FourthMigrate.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
