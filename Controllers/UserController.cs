@@ -132,7 +132,7 @@ namespace Qlity.Controllers
         
 
         [HttpPut]
-        [Route("UpdateUserProfile/{id}")]
+        [Route("UpdateUProfile/{id}")]
         public HttpResponseMessage UpdateUserProfile(int id, Profile pro)
         {
             try
@@ -144,7 +144,7 @@ namespace Qlity.Controllers
                     HttpResponseMessage resp = new HttpResponseMessage(HttpStatusCode.OK);
                     return resp;
                 }
-                HttpResponseMessage r = new HttpResponseMessage(HttpStatusCode.BadRequest);
+                HttpResponseMessage r = new HttpResponseMessage(HttpStatusCode.NotModified);
                 return r;
             }
             catch (Exception)
