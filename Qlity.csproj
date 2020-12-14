@@ -105,14 +105,12 @@
     <Compile Include="Models\Gig.cs" />
     <Compile Include="Models\Profile.cs" />
     <Compile Include="Models\User.cs" />
+    <Compile Include="Models\Utils.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
     <None Include="Properties\PublishProfiles\Default Settings.pubxml" />
-    <None Include="Properties\PublishProfiles\Default Settings1.pubxml" />
-    <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
-    <None Include="Properties\PublishProfiles\FolderProfile1.pubxml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

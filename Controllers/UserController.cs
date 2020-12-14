@@ -13,6 +13,24 @@ namespace Qlity.Controllers
     {
           DatabaseContext db = new DatabaseContext();
 
+        [HttpGet]
+        [Route("UserExists")]
+        public Boolean UserExist(string uEmail)
+        {
+            try
+            {
+                var user = db.Users.Where(use => use.uEmail == uEmail).FirstOrDefault();
+                if (user.uEmail == null)
+                {
+                    return false;
+                }
+                else
+                    return true;
+            }catch(Exception)
+            {
+                return false;
+            }
+        }
 
         [HttpGet]
         [Route("UserLogon")]
