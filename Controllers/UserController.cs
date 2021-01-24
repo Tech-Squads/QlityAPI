@@ -133,11 +133,17 @@ namespace Qlity.Controllers
             try
             {
 
-                db.Users.Add(u);
-                db.SaveChanges();
-                HttpResponseMessage resp = new HttpResponseMessage(HttpStatusCode.Created);
-                return resp;
+            var user = db.Users.Where(p => p.uEmail == u.uEmail).FirstOrDefault<User>();
 
+                if(user == null)
+                {
+                  db.Users.Add(u);
+                db.SaveChanges();
+                HttpResponseMessage respon = new HttpResponseMessage(HttpStatusCode.Created);
+                return respon;
+                }
+                HttpResponseMessage resp = new HttpResponseMessage(HttpStatusCode.Unauthorized);
+                return resp;
             }
             catch (Exception)
             {
