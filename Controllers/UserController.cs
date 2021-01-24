@@ -11,8 +11,7 @@ namespace Qlity.Controllers
 {
     public class UserController : ApiController
     {
-          DatabaseContext db = new DatabaseContext();
-
+        DatabaseContext db = new DatabaseContext();
 
         [HttpGet]
         [Route("UserLogon")]
@@ -20,8 +19,13 @@ namespace Qlity.Controllers
         {
             try
             {
+                HttpResponseMessage res = new HttpResponseMessage(HttpStatusCode.OK);
                 var LoggedUser = db.Users.Where(us => us.uEmail == Uemail && us.uPassword == Upassword).FirstOrDefault<User>();
-                return LoggedUser;
+               if(LoggedUser != null)
+               {
+                    return LoggedUser;
+               }
+                return null;
             }
             
             catch (Exception)
@@ -29,6 +33,57 @@ namespace Qlity.Controllers
 
                 HttpResponseMessage res = new HttpResponseMessage(HttpStatusCode.InternalServerError);
                 return null;
+            }
+        }
+
+
+
+
+        [HttpGet]
+        [Route("GetUser")]
+        public User UserGet(string Uemail, string Upassword)
+        {
+            try
+            {
+                HttpResponseMessage res = new HttpResponseMessage(HttpStatusCode.OK);
+                var LoggedUser = db.Users.Where(us => us.uEmail == Uemail && us.uPassword == Upassword).FirstOrDefault<User>();
+               if(LoggedUser != null)
+                {
+                    return null;
+                }
+                return LoggedUser;
+            }
+
+            catch (Exception)
+            {
+
+                HttpResponseMessage res = new HttpResponseMessage(HttpStatusCode.InternalServerError);
+                return null;
+            }
+        }
+
+
+
+        [HttpGet]
+        [Route("Login")]
+        public bool ULogin(string Uemail,string Upassword)
+        {
+            try
+            {
+                HttpResponseMessage res = new HttpResponseMessage(HttpStatusCode.OK);
+
+                var LoggedUser = db.Users.Where(us => us.uEmail == Uemail && us.uPassword == Upassword).FirstOrDefault<User>();
+                if(LoggedUser != null)
+                {
+                   return true;
+                }
+                    return false;
+            }
+            
+            catch (Exception)
+            {
+                HttpResponseMessage res = new HttpResponseMessage(HttpStatusCode.InternalServerError);
+                return false;
             }
         }
 

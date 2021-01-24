@@ -97,9 +97,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202011051227422_initMigrate.cs" />
-    <Compile Include="Migrations\202011051227422_initMigrate.designer.cs">
-      <DependentUpon>202011051227422_initMigrate.cs</DependentUpon>
+    <Compile Include="Migrations\202101191532166_InitialMigration.cs" />
+    <Compile Include="Migrations\202101191532166_InitialMigration.designer.cs">
+      <DependentUpon>202101191532166_InitialMigration.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Gig.cs" />
@@ -121,8 +121,8 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202011051227422_initMigrate.resx">
-      <DependentUpon>202011051227422_initMigrate.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202101191532166_InitialMigration.resx">
+      <DependentUpon>202101191532166_InitialMigration.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
