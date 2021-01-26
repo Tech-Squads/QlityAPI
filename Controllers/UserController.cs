@@ -16,19 +16,128 @@ namespace Qlity.Controllers
 
         [HttpGet]
         [Route("UserLogon")]
-        public User UserLogin(string Uemail,string Upassword)
+        public User UserLogin(string Uemail, string Upassword)
         {
             try
             {
+                HttpResponseMessage res = new HttpResponseMessage(HttpStatusCode.OK);
                 var LoggedUser = db.Users.Where(us => us.uEmail == Uemail && us.uPassword == Upassword).FirstOrDefault<User>();
-                return LoggedUser;
+                if (LoggedUser != null)
+                {
+                    return LoggedUser;
+                }
+                return null;
             }
-            
+
             catch (Exception)
             {
 
                 HttpResponseMessage res = new HttpResponseMessage(HttpStatusCode.InternalServerError);
                 return null;
+            }
+        }
+
+
+
+        //for google login and search email on database for reset password.
+
+        [HttpGet]
+        [Route("UserLogongoogle")]
+        public User UserLogingin(string Uemail)
+        {
+            try
+            {
+                HttpResponseMessage res = new HttpResponseMessage(HttpStatusCode.OK);
+                var LoggedUser = db.Users.Where(us => us.uEmail == Uemail).FirstOrDefault<User>();
+                if (LoggedUser != null)
+                {
+                    return LoggedUser;
+                }
+                return null;
+            }
+
+            catch (Exception)
+            {
+
+                HttpResponseMessage res = new HttpResponseMessage(HttpStatusCode.InternalServerError);
+                return null;
+            }
+        }
+
+
+        //for password for reset password
+        [HttpGet]
+        [Route("UserLogonPass")]
+        public User UserLogins( string Upassword)
+        {
+            try
+            {
+                HttpResponseMessage res = new HttpResponseMessage(HttpStatusCode.OK);
+                var LoggedUser = db.Users.Where(us =>  us.uPassword == Upassword).FirstOrDefault<User>();
+                if (LoggedUser != null)
+                {
+                    return LoggedUser;
+                }
+                return null;
+            }
+
+            catch (Exception)
+            {
+
+                HttpResponseMessage res = new HttpResponseMessage(HttpStatusCode.InternalServerError);
+                return null;
+            }
+        }
+
+
+
+
+
+        [HttpGet]
+        [Route("GetUser")]
+        public User UserGet(string Uemail, string Upassword)
+        {
+            try
+            {
+                HttpResponseMessage res = new HttpResponseMessage(HttpStatusCode.OK);
+                var LoggedUser = db.Users.Where(us => us.uEmail == Uemail && us.uPassword == Upassword).FirstOrDefault<User>();
+                if (LoggedUser != null)
+                {
+                    return null;
+                }
+                return LoggedUser;
+            }
+
+            catch (Exception)
+            {
+
+                HttpResponseMessage res = new HttpResponseMessage(HttpStatusCode.InternalServerError);
+                return null;
+            }
+        }
+
+
+
+        [HttpGet]
+        [Route("Login")]
+        public bool ULogin(string Uemail, string Upassword)
+        {
+            try
+            {
+                HttpResponseMessage res = new HttpResponseMessage(HttpStatusCode.OK);
+
+                var LoggedUser = db.Users.Where(us => us.uEmail == Uemail && us.uPassword == Upassword).FirstOrDefault<User>();
+                if (LoggedUser != null)
+                {
+                    return true;
+                }
+                return false;
+            }
+
+            catch (Exception)
+            {
+                HttpResponseMessage res = new HttpResponseMessage(HttpStatusCode.InternalServerError);
+                return false;
             }
         }
 
@@ -45,10 +154,10 @@ namespace Qlity.Controllers
         public Profile GetProfileByID(int? id)
         {
             var profi = db.Profiles.Where(p => p.userID == id).FirstOrDefault<Profile>();
-            return profi; 
+            return profi;
         }
 
-        
+
 
         [Route("GetGigByID/{id?}")]
         public Gig GetGigByID(int? id)
@@ -74,15 +183,21 @@ namespace Qlity.Controllers
         [Route("AddUser")]
         public HttpResponseMessage CreateUser(User u)
         {
-         
+
             try
             {
 
-                db.Users.Add(u);
-                db.SaveChanges();
-                HttpResponseMessage resp = new HttpResponseMessage(HttpStatusCode.Created);
-                return resp;
+                var user = db.Users.Where(p => p.uEmail == u.uEmail).FirstOrDefault<User>();
 
+                if (user == null)
+                {
+                    db.Users.Add(u);
+                    db.SaveChanges();
+                    HttpResponseMessage respon = new HttpResponseMessage(HttpStatusCode.Created);
+                    return respon;
+                }
+                HttpResponseMessage resp = new HttpResponseMessage(HttpStatusCode.Unauthorized);
+                return resp;
             }
             catch (Exception)
             {
@@ -129,10 +244,10 @@ namespace Qlity.Controllers
             }
         }
 
-        
+
 
         [HttpPut]
-        [Route("UpdateUserProfile/{id}")]
+        [Route("UpdateUProfile/{id}")]
         public HttpResponseMessage UpdateUserProfile(int id, Profile pro)
         {
             try
@@ -144,7 +259,7 @@ namespace Qlity.Controllers
                     HttpResponseMessage resp = new HttpResponseMessage(HttpStatusCode.OK);
                     return resp;
                 }
-                HttpResponseMessage r = new HttpResponseMessage(HttpStatusCode.BadRequest);
+                HttpResponseMessage r = new HttpResponseMessage(HttpStatusCode.NotModified);
                 return r;
             }
             catch (Exception)
@@ -161,7 +276,7 @@ namespace Qlity.Controllers
         {
             try
             {
-                if(id == updateUser.UserID)
+                if (id == updateUser.UserID)
                 {
                     db.Entry(updateUser).State = System.Data.Entity.EntityState.Modified;
                     db.SaveChanges();
@@ -173,7 +288,7 @@ namespace Qlity.Controllers
                     HttpResponseMessage r = new HttpResponseMessage(HttpStatusCode.NotModified);
                     return r;
                 }
-                
+
             }
             catch (Exception)
             {
@@ -208,5 +323,25 @@ namespace Qlity.Controllers
 
             }
         }
+
+        //for checking email if does exist to reset password
+        //[HttpGet]
+        //[Route("UserLogon")]
+        //public User UserLogingoogle(string Uemail)
+        //{
+        //    try
+        //    {
+        //        var LoggedUser = db.Users.Where(us => us.uEmail == Uemail).FirstOrDefault<User>();
+        //        return LoggedUser;
+        //    }
+
+        //    catch (Exception)
+        //    {
+
+        //        HttpResponseMessage res = new HttpResponseMessage(HttpStatusCode.InternalServerError);
+        //        return null;
+        //    }
+        //}
+
     }
 }
