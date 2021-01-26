@@ -97,21 +97,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202011051227422_initMigrate.cs" />
-    <Compile Include="Migrations\202011051227422_initMigrate.designer.cs">
-      <DependentUpon>202011051227422_initMigrate.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202011060853179_SndMigration.cs" />
-    <Compile Include="Migrations\202011060853179_SndMigration.designer.cs">
-      <DependentUpon>202011060853179_SndMigration.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202011090952452_3rdMigration.cs" />
-    <Compile Include="Migrations\202011090952452_3rdMigration.designer.cs">
-      <DependentUpon>202011090952452_3rdMigration.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202011122101254_FourthMigrate.cs" />
-    <Compile Include="Migrations\202011122101254_FourthMigrate.designer.cs">
-      <DependentUpon>202011122101254_FourthMigrate.cs</DependentUpon>
+    <Compile Include="Migrations\202101191532166_InitialMigration.cs" />
+    <Compile Include="Migrations\202101191532166_InitialMigration.designer.cs">
+      <DependentUpon>202101191532166_InitialMigration.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Gig.cs" />
@@ -121,6 +109,10 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+    <None Include="Properties\PublishProfiles\Default Settings.pubxml" />
+    <None Include="Properties\PublishProfiles\Default Settings1.pubxml" />
+    <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
+    <None Include="Properties\PublishProfiles\FolderProfile1.pubxml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -129,17 +121,8 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202011051227422_initMigrate.resx">
-      <DependentUpon>202011051227422_initMigrate.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202011060853179_SndMigration.resx">
-      <DependentUpon>202011060853179_SndMigration.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202011090952452_3rdMigration.resx">
-      <DependentUpon>202011090952452_3rdMigration.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202011122101254_FourthMigrate.resx">
-      <DependentUpon>202011122101254_FourthMigrate.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202101191532166_InitialMigration.resx">
+      <DependentUpon>202101191532166_InitialMigration.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
