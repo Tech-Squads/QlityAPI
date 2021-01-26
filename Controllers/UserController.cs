@@ -324,24 +324,6 @@ namespace Qlity.Controllers
             }
         }
 
-        //for checking email if does exist to reset password
-        //[HttpGet]
-        //[Route("UserLogon")]
-        //public User UserLogingoogle(string Uemail)
-        //{
-        //    try
-        //    {
-        //        var LoggedUser = db.Users.Where(us => us.uEmail == Uemail).FirstOrDefault<User>();
-        //        return LoggedUser;
-        //    }
-
-        //    catch (Exception)
-        //    {
-
-        //        HttpResponseMessage res = new HttpResponseMessage(HttpStatusCode.InternalServerError);
-        //        return null;
-        //    }
-        //}
 
     }
 }
