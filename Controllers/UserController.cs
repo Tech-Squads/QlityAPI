@@ -36,10 +36,7 @@ namespace Qlity.Controllers
                 return null;
             }
         }
-
-
-
-        //for google login and search email on database for reset password.
+        //for google login and search email on database for reset pass
 
         [HttpGet]
         [Route("UserLogongoogle")]
