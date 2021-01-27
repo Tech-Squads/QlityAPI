@@ -223,6 +223,32 @@ namespace Qlity.Controllers
         }
 
 
+        //Update gig
+
+
+        [HttpPut]
+        [Route("Updategig/{id}")]
+        public HttpResponseMessage UpdateUserProfile(int id, Gig gig)
+        {
+            try
+            {
+                if (id == gig.GigID)
+                {
+                    db.Entry(gig).State = System.Data.Entity.EntityState.Modified;
+                    db.SaveChanges();
+                    HttpResponseMessage resp = new HttpResponseMessage(HttpStatusCode.OK);
+                    return resp;
+                }
+                HttpResponseMessage r = new HttpResponseMessage(HttpStatusCode.NotModified);
+                return r;
+            }
+            catch (Exception)
+            {
+                HttpResponseMessage reps = new HttpResponseMessage(HttpStatusCode.InternalServerError);
+                return reps;
+            }
+        }
+
 
         [Route("AddProfile")]
         public HttpResponseMessage CreateUProfile(Profile pro)
