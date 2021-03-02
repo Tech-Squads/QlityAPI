@@ -7,13 +7,13 @@ namespace Qlity.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.4.4")]
-    public sealed partial class initMigrate : IMigrationMetadata
+    public sealed partial class add_initial_gigs : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(initMigrate));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(add_initial_gigs));
         
         string IMigrationMetadata.Id
         {
-            get { return "202011051227422_initMigrate"; }
+            get { return "202102221030063_add_initial_gigs"; }
         }
         
         string IMigrationMetadata.Source
