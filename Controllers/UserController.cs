@@ -73,6 +73,26 @@ namespace Qlity.Controllers
             }
         }
 
+        //for getting  user by userid
+
+        [Route("GetGigby/{id?}")]
+        public IEnumerable<Gig> GetFir(int? id)
+        {
+            try
+            {
+
+                HttpResponseMessage res = new HttpResponseMessage(HttpStatusCode.OK);
+                return db.Gigs.Where(us => us.RequestorID == id || id == null).ToList();
+
+            }
+            catch (Exception)
+            {
+
+                HttpResponseMessage res = new HttpResponseMessage(HttpStatusCode.InternalServerError);
+                return null;
+            }
+        }
+
 
 
 
@@ -164,7 +184,7 @@ namespace Qlity.Controllers
         }
 
 
-
+        //Login using Users table
         [HttpGet]
         [Route("UserLogon")]
         public User UserLogin(string Uemail, string Upassword)
@@ -240,7 +260,7 @@ namespace Qlity.Controllers
 
 
 
-
+        //Get user from User table
         [HttpGet]
         [Route("GetUser")]
         public User UserGet(string Uemail, string Upassword)
@@ -322,7 +342,7 @@ namespace Qlity.Controllers
 
 
 
-        //get user profiles
+        //get user profiles using users table
         [Route("GetUserPro/{id?}")]
         public User GetUser(int? id)
         {
@@ -337,12 +357,22 @@ namespace Qlity.Controllers
             return db.Gigs.Find(id);
         }
 
-
+        //Using Users table
         [Route("GetAllUsers")]
         public IEnumerable<User> GetAllUsers()
         {
             return db.Users.ToList();
         }
+
+
+        //Using Profile tables
+        [Route("GetAllProfiles")]
+        public IEnumerable<Profile> GetAllProfiles()
+        {
+            return db.Profiles.ToList();
+        }
+
+
 
         [Route("GetAllU")]
         public IQueryable<User> GetAllU()
@@ -358,7 +388,7 @@ namespace Qlity.Controllers
             return db.Gigs.ToList();
         }
 
-
+        //Add user on Users  table
         [HttpPost]
         [Route("AddUser")]
         public HttpResponseMessage CreateUser(User u)
@@ -413,7 +443,7 @@ namespace Qlity.Controllers
         {
             try
             {
-                if (id == updategig.RequestorID)
+                if (id == updategig.GigID)
                 {
                     db.Entry(updategig).State = System.Data.Entity.EntityState.Modified;
                     db.SaveChanges();
@@ -542,7 +572,8 @@ namespace Qlity.Controllers
         //    }
 
         //}
-        public HttpResponseMessage DeleteUser(int id)
+
+        public HttpResponseMessage DeleteGig(int id)
         {
             try
             {
@@ -567,6 +598,35 @@ namespace Qlity.Controllers
 
             }
         }
+
+
+        //Add profile using Profile tables
+        [Route("AddProfile")]
+        public HttpResponseMessage CreateUProfil(Profile pro)
+        {
+            try
+            {
+                db.Profiles.Add(pro);
+                db.SaveChanges();
+                HttpResponseMessage resp = new HttpResponseMessage(HttpStatusCode.Created);
+                return resp;
+            }
+            catch (Exception)
+            {
+                HttpResponseMessage reps = new HttpResponseMessage(HttpStatusCode.InternalServerError);
+                return reps;
+            }
+        }
+
+        //Get user proifle using profile table
+        [Route("GetUserProfile/{id?}")]
+        public Profile GetProfilByID(int? id)
+        {
+            var profi = db.Profiles.Where(p => p.userID == id).FirstOrDefault<Profile>();
+            return profi;
+        }
+
+
 
 
     }
