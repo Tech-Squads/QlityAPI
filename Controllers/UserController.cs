@@ -73,6 +73,28 @@ namespace Qlity.Controllers
             }
         }
 
+
+        //for getting  Gig by id
+
+        [Route("GetGigByGig/{id?}")]
+        public IEnumerable<Gig> GetFirgig(int? id)
+        {
+            try
+            {
+
+                HttpResponseMessage res = new HttpResponseMessage(HttpStatusCode.OK);
+                return db.Gigs.Where(us => us.GigID == id || id == null).ToList();
+
+            }
+            catch (Exception)
+            {
+
+                HttpResponseMessage res = new HttpResponseMessage(HttpStatusCode.InternalServerError);
+                return null;
+            }
+        }
+
+
         //for getting  user by userid
 
         [Route("GetGigby/{id?}")]
@@ -83,6 +105,25 @@ namespace Qlity.Controllers
 
                 HttpResponseMessage res = new HttpResponseMessage(HttpStatusCode.OK);
                 return db.Gigs.Where(us => us.RequestorID == id || id == null).ToList();
+
+            }
+            catch (Exception)
+            {
+
+                HttpResponseMessage res = new HttpResponseMessage(HttpStatusCode.InternalServerError);
+                return null;
+            }
+        }
+
+        //get profile by id
+        [Route("GetProfby/{id?}")]
+        public IEnumerable<User> Getprof(int? id)
+        {
+            try
+            {
+
+                HttpResponseMessage res = new HttpResponseMessage(HttpStatusCode.OK);
+                return db.Users.Where(us => us.UserID == id || id == null).ToList();
 
             }
             catch (Exception)
@@ -120,6 +161,7 @@ namespace Qlity.Controllers
                 return null;
             }
         }
+
 
         //for getting  all users that are new contains [status ="new"]
 
@@ -208,7 +250,7 @@ namespace Qlity.Controllers
             }
         }
         //for google login and search email on database for reset password
-
+       
         [HttpGet]
         [Route("UserLogongoogle")]
         public User UserLogingin(string Uemail)
@@ -317,6 +359,11 @@ namespace Qlity.Controllers
             return db.Users.Find(id);
         }
 
+
+     
+
+
+
         //Getting user profile by id
         [Route("GetUserProfilebyId/{id?}")]
         public Profile GetUserProfilebyId(int? id)
@@ -356,6 +403,21 @@ namespace Qlity.Controllers
         {
             return db.Gigs.Find(id);
         }
+
+
+        [Route("GetProIfByID/{id?}")]
+        public Profile Getproif(int? id)
+        {
+            return db.Profiles.Find(id);
+        }
+
+
+        [Route("GetProUserIfByID/{id?}")]
+        public User GetproifS(int? id)
+        {
+            return db.Users.Find(id);
+        }
+
 
         //Using Users table
         [Route("GetAllUsers")]
@@ -540,6 +602,36 @@ namespace Qlity.Controllers
         }
 
 
+
+        [HttpPut]
+        [Route("UpdateUseremail/{email}")]
+        public HttpResponseMessage UpdateUseremail(string email, User updateUser)
+        {
+            try
+            {
+                if (email == updateUser.uEmail)
+                {
+                    db.Entry(updateUser).State = System.Data.Entity.EntityState.Modified;
+                    db.SaveChanges();
+                    HttpResponseMessage resp = new HttpResponseMessage(HttpStatusCode.OK);
+                    return resp;
+                }
+                else
+                {
+                    HttpResponseMessage r = new HttpResponseMessage(HttpStatusCode.NotModified);
+                    return r;
+                }
+
+            }
+            catch (Exception)
+            {
+                HttpResponseMessage reps = new HttpResponseMessage(HttpStatusCode.InternalServerError);
+
+                return reps;
+            }
+        }
+
+
         //[Route("Emailsend")]
 
         //public HttpResponseMessage Emailsend(EmailClass u)
@@ -573,14 +665,17 @@ namespace Qlity.Controllers
 
         //}
 
+
+        //Deleting gig using Gig table
+        [Route("DeleteGig/{id}")]
         public HttpResponseMessage DeleteGig(int id)
         {
             try
             {
-                User user = db.Users.Find(id);
-                if (user != null)
+               Gig gig = db.Gigs.Find(id);
+                if (gig != null)
                 {
-                    db.Users.Remove(user);
+                    db.Gigs.Remove(gig);
                     db.SaveChanges();
                     HttpResponseMessage res = new HttpResponseMessage(HttpStatusCode.OK);
                     return res;
@@ -618,15 +713,27 @@ namespace Qlity.Controllers
             }
         }
 
-        //Get user proifle using profile table
-        [Route("GetUserProfile/{id?}")]
-        public Profile GetProfilByID(int? id)
+      
+
+        //for getting  user by userid
+
+        [Route("GetProBy/{id?}")]
+        public IEnumerable<Profile> GetFirptro(int? id)
         {
-            var profi = db.Profiles.Where(p => p.userID == id).FirstOrDefault<Profile>();
-            return profi;
+            try
+            {
+
+                HttpResponseMessage res = new HttpResponseMessage(HttpStatusCode.OK);
+                return db.Profiles.Where(us => us.userID == id || id == null).ToList();
+
+            }
+            catch (Exception)
+            {
+
+                HttpResponseMessage res = new HttpResponseMessage(HttpStatusCode.InternalServerError);
+                return null;
+            }
         }
-
-
 
 
     }
