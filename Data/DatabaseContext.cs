@@ -17,5 +17,7 @@ namespace Qlity.Data
         public DbSet<User> Users { get; set; }
         public DbSet<Profile> Profiles { get; set; }
         public DbSet<Gig> Gigs { get; set; }
+
+        //public DbSet<ResponsesData> ResponsesDatas { get; set; }
     }
 }

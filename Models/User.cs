@@ -29,18 +29,17 @@ namespace Qlity.Models
         public string uPastProjectDurations { get; set; }
         public string uPastProjectDetail { get; set; }
 
+        public string cellnumber { get; set; }
+
         //for gig
-        public int uGigIDs { get; set; }
-        public string uGigTitles { get; set; }
-        public string uDueDates { get; set; }
-        public string uGigDescriptions { get; set; }
-        public string uRequiredSkills { get; set; }
-        public string uContactDetails { get; set; }
-        public int uRequestorIDs { get; set; }
+
+
+
+
 
         public string uImagePs { get; set; }
-        public string uStatusGigs { get; set; }
-        public string uThesorting { get; set; }
+      
+     
 
      
 
@@ -59,17 +58,11 @@ namespace Qlity.Models
             this.uPastProjectNames = u.uPastProjectNames;
             this.uPastProjectDurations = u.uPastProjectDurations;
             this.uPastProjectDetail = u.uPastProjectDetail;
+            this.cellnumber = u.cellnumber;
 
-            this.uGigIDs = u.uGigIDs;
-            this.uGigTitles = u.uGigTitles;
-            this.uRequestorIDs = u.uRequestorIDs;
-            this.uGigDescriptions = u.uGigDescriptions;
-            this.uContactDetails = u.uContactDetails;
-            this.uRequiredSkills = u.uRequiredSkills;
 
             this.uImagePs = u.uImagePs;
-            this.uStatusGigs = u.uStatusGigs;
-            this.uThesorting = u.uThesorting;
+      
             
 
 

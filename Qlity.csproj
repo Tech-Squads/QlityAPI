@@ -97,9 +97,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202102221030063_add_initial_gigs.cs" />
-    <Compile Include="Migrations\202102221030063_add_initial_gigs.designer.cs">
-      <DependentUpon>202102221030063_add_initial_gigs.cs</DependentUpon>
+    <Compile Include="Migrations\202104261332406_intila_satrt.cs" />
+    <Compile Include="Migrations\202104261332406_intila_satrt.designer.cs">
+      <DependentUpon>202104261332406_intila_satrt.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Gig.cs" />
@@ -119,8 +119,8 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202102221030063_add_initial_gigs.resx">
-      <DependentUpon>202102221030063_add_initial_gigs.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202104261332406_intila_satrt.resx">
+      <DependentUpon>202104261332406_intila_satrt.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

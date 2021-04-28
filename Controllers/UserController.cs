@@ -98,12 +98,14 @@ namespace Qlity.Controllers
         //for getting  user by userid
 
         [Route("GetGigby/{id?}")]
-        public IEnumerable<Gig> GetFir(int? id)
+        //public IEnumerable<Gig> GetFir(int? id ,string be = "check")
+              public IEnumerable<Gig> GetFir(int? id)
         {
             try
             {
 
                 HttpResponseMessage res = new HttpResponseMessage(HttpStatusCode.OK);
+                //return db.Gigs.Where(us => us.RequestorID == id && us.GigTitle==be).ToList();
                 return db.Gigs.Where(us => us.RequestorID == id || id == null).ToList();
 
             }
@@ -144,35 +146,57 @@ namespace Qlity.Controllers
 
         //for getting  all users name that start with specific letter
 
-        [Route("Getskillscontains/{skills?}")]
-        public IEnumerable<User> GetFir(string skills)
-        {
-            try
-            {
+        //[Route("Getskillscontains/{skills?}")]
+        //public IEnumerable<User> GetFir(string skills)
+        //{
+        //    try
+        //    {
 
-                HttpResponseMessage res = new HttpResponseMessage(HttpStatusCode.OK);
-                return db.Users.Where(us => us.uRequiredSkills.Contains(skills) || skills == null).ToList();
+        //        HttpResponseMessage res = new HttpResponseMessage(HttpStatusCode.OK);
+        //        return db.Users.Where(us => us.uRequiredSkills.Contains(skills) || skills == null).ToList();
 
-            }
-            catch (Exception)
-            {
+        //    }
+        //    catch (Exception)
+        //    {
 
-                HttpResponseMessage res = new HttpResponseMessage(HttpStatusCode.InternalServerError);
-                return null;
-            }
-        }
+        //        HttpResponseMessage res = new HttpResponseMessage(HttpStatusCode.InternalServerError);
+        //        return null;
+        //    }
+        //}
 
 
         //for getting  all users that are new contains [status ="new"]
 
-        [Route("Getnewgigrunning")]
-        public IEnumerable<User> Getnewgigrunning(string skills="New")
+        //[Route("Getnewgigrunning")]
+        //public IEnumerable<User> Getnewgigrunning(string skills="New")
+        //{
+        //    try
+        //    {
+
+        //        HttpResponseMessage res = new HttpResponseMessage(HttpStatusCode.OK);
+        //        return db.Users.Where(us => us.uStatusGigs.Contains(skills)).ToList();
+
+        //    }
+        //    catch (Exception)
+        //    {
+
+        //        HttpResponseMessage res = new HttpResponseMessage(HttpStatusCode.InternalServerError);
+        //        return null;
+        //    }
+        //}
+
+
+
+        //for getting  users that contain [Gigstatus ="New"]
+
+        [Route("Gettingallgigs")]
+        public IEnumerable<Gig> GetAllGigs(string skills = "New")
         {
             try
             {
 
                 HttpResponseMessage res = new HttpResponseMessage(HttpStatusCode.OK);
-                return db.Users.Where(us => us.uStatusGigs.Contains(skills)).ToList();
+                return db.Gigs.Where(us => us.Gig_Status.Contains(skills)).ToList();
 
             }
             catch (Exception)
@@ -184,17 +208,16 @@ namespace Qlity.Controllers
         }
 
 
+        //for getting  users that contain [Gigstatus ="New"]
 
-        //for getting  users that contain [HasGig ="True"]
-
-        [Route("Gettingallgigs")]
-        public IEnumerable<User> GetAllGigs(string skills = "True")
+        [Route("GettingallProposedGigs")]
+        public IEnumerable<Gig> GetAllGigProposed(string skills = "Proposal")
         {
             try
             {
 
                 HttpResponseMessage res = new HttpResponseMessage(HttpStatusCode.OK);
-                return db.Users.Where(us => us.HasGig.Contains(skills)).ToList();
+                return db.Gigs.Where(us => us.Gig_Status.Contains(skills)).ToList();
 
             }
             catch (Exception)
@@ -207,23 +230,23 @@ namespace Qlity.Controllers
 
         //for getting  all users that contains your skills
 
-        [Route("Getnumbercontains/{number?}")]
-        public IEnumerable<User> GetFidate(string number)
-        {
-            try
-            {
-              
-                HttpResponseMessage res = new HttpResponseMessage(HttpStatusCode.OK);
-                return db.Users.Where(us => us.uRequiredSkills.Contains(number) || number == null).ToList();
+        //[Route("Getnumbercontains/{number?}")]
+        //public IEnumerable<User> GetFidate(string number)
+        //{
+        //    try
+        //    {
 
-            }
-            catch (Exception)
-            {
+        //        HttpResponseMessage res = new HttpResponseMessage(HttpStatusCode.OK);
+        //        return db.Users.Where(us => us.uRequiredSkills.Contains(number) || number == null).ToList();
 
-                HttpResponseMessage res = new HttpResponseMessage(HttpStatusCode.InternalServerError);
-                return null;
-            }
-        }
+        //    }
+        //    catch (Exception)
+        //    {
+
+        //        HttpResponseMessage res = new HttpResponseMessage(HttpStatusCode.InternalServerError);
+        //        return null;
+        //    }
+        //}
 
 
         //Login using Users table
@@ -373,19 +396,19 @@ namespace Qlity.Controllers
 
 
         //get Requestorbyid
-        [Route("GetRequestorByID/{id?}")]
-        public Gig GetRequestorByID(int? id)
-        {
-            return db.Gigs.Find(id);
-        }
+        //[Route("GetRequestorByID/{id?}")]
+        //public Gig GetRequestorByID(int? id)
+        //{
+        //    return db.Gigs.Find(id);
+        //}
 
 
-        [Route("GetUserProfile/{id?}")]
-        public Profile GetProfileByID(int? id)
-        {
-            var profi = db.Profiles.Where(p => p.userID == id).FirstOrDefault<Profile>();
-            return profi;
-        }
+        //[Route("GetUserProfile/{id?}")]
+        //public Profile GetProfileByID(int? id)
+        //{
+        //    var profi = db.Profiles.Where(p => p.userID == id).FirstOrDefault<Profile>();
+        //    return profi;
+        //}
 
 
 
@@ -450,6 +473,8 @@ namespace Qlity.Controllers
             return db.Gigs.ToList();
         }
 
+        
+
         //Add user on Users  table
         [HttpPost]
         [Route("AddUser")]
@@ -479,7 +504,7 @@ namespace Qlity.Controllers
                 return resp;
             }
         }
-
+        //Adding gig
         [HttpPost]
         [Route("AddGig")]
         public HttpResponseMessage CreateGig(Gig g)
@@ -498,6 +523,28 @@ namespace Qlity.Controllers
                 return reps;
             }
         }
+
+        //Adding response gig
+        [HttpPost]
+        [Route("AddResponse")]
+        public HttpResponseMessage CreateRespond(Profile res)
+        {
+            try
+            {
+                db.Profiles.Add(res);
+                db.SaveChanges();
+                HttpResponseMessage resp = new HttpResponseMessage(HttpStatusCode.Created);
+                return resp;
+            }
+            catch (Exception)
+            {
+                HttpResponseMessage reps = new HttpResponseMessage(HttpStatusCode.InternalServerError);
+
+                return reps;
+            }
+        }
+
+
         //updateGig
         [HttpPut]
         [Route("UpdateGig/{id}")]
@@ -546,31 +593,31 @@ namespace Qlity.Controllers
 
 
 
-        [HttpPut]
-        [Route("UpdateUProfile/{id}")]
-        public HttpResponseMessage UpdateUProfile(int id, Profile pro)
-        {
-            try
-            {
-                if (id == pro.userID)
-                {
-                    db.Entry(pro).State = System.Data.Entity.EntityState.Modified;
-                    db.SaveChanges();
-                    HttpResponseMessage resp = new HttpResponseMessage(HttpStatusCode.OK);
-                    return resp;
-                }
-                else
-                {
-                    HttpResponseMessage r = new HttpResponseMessage(HttpStatusCode.NotModified);
-                    return r;
-                }
-            }
-            catch (Exception)
-            {
-                HttpResponseMessage reps = new HttpResponseMessage(HttpStatusCode.InternalServerError);
-                return reps;
-            }
-        }
+        //[HttpPut]
+        //[Route("UpdateUProfile/{id}")]
+        //public HttpResponseMessage UpdateUProfile(int id, Profile pro)
+        //{
+        //    try
+        //    {
+        //        if (id == pro.userID)
+        //        {
+        //            db.Entry(pro).State = System.Data.Entity.EntityState.Modified;
+        //            db.SaveChanges();
+        //            HttpResponseMessage resp = new HttpResponseMessage(HttpStatusCode.OK);
+        //            return resp;
+        //        }
+        //        else
+        //        {
+        //            HttpResponseMessage r = new HttpResponseMessage(HttpStatusCode.NotModified);
+        //            return r;
+        //        }
+        //    }
+        //    catch (Exception)
+        //    {
+        //        HttpResponseMessage reps = new HttpResponseMessage(HttpStatusCode.InternalServerError);
+        //        return reps;
+        //    }
+        //}
 
 
         [HttpPut]
@@ -713,18 +760,41 @@ namespace Qlity.Controllers
             }
         }
 
-      
+
 
         //for getting  user by userid
 
-        [Route("GetProBy/{id?}")]
-        public IEnumerable<Profile> GetFirptro(int? id)
+        //[Route("GetProBy/{id?}")]
+        //public IEnumerable<Profile> GetFirptro(int? id)
+        //{
+        //    try
+        //    {
+
+        //        HttpResponseMessage res = new HttpResponseMessage(HttpStatusCode.OK);
+        //        return db.Profiles.Where(us => us.userID == id || id == null).ToList();
+
+        //    }
+        //    catch (Exception)
+        //    {
+
+        //        HttpResponseMessage res = new HttpResponseMessage(HttpStatusCode.InternalServerError);
+        //        return null;
+        //    }
+        //}
+
+
+        //public IEnumerable<Gig> GetFir(int? id ,string be = "check")
+
+        //Getting gig by status of proposal
+        [Route("GetGigbyProsal/{id}")]
+        public IEnumerable<Gig> Getproposal(string id, string be = "Proposal")
         {
             try
             {
 
                 HttpResponseMessage res = new HttpResponseMessage(HttpStatusCode.OK);
-                return db.Profiles.Where(us => us.userID == id || id == null).ToList();
+                return db.Gigs.Where(us => us.GiggerIDs == id && us.Gig_Status==be).ToList();
+             
 
             }
             catch (Exception)
@@ -734,7 +804,24 @@ namespace Qlity.Controllers
                 return null;
             }
         }
+        //Getting gig for requestor to accept or reject proposal
+        [Route("GetGigbyProsalReq/{id}")]
+        public IEnumerable<Gig> Getproposalreq(int id, string be = "Proposal")
+        {
+            try
+            {
+
+                HttpResponseMessage res = new HttpResponseMessage(HttpStatusCode.OK);
+                return db.Gigs.Where(us => us.RequestorID == id && us.Gig_Status == be).ToList();
 
 
+            }
+            catch (Exception)
+            {
+
+                HttpResponseMessage res = new HttpResponseMessage(HttpStatusCode.InternalServerError);
+                return null;
+            }
+        }
     }
 }
