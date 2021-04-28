@@ -29,6 +29,11 @@ namespace Qlity.Models
         public string Commercial { get; set; }
 
 
+        public string Name { get; set; }
+        public string Surname { get; set; }
+        public string Email { get; set; }
+
+
         public Gig()
         {
 
@@ -54,6 +59,11 @@ namespace Qlity.Models
             this.GiggerIDs = gig.GiggerIDs;
             this.Date_Responded = gig.Date_Responded;
             this.Commercial = gig.Commercial;
+
+            this.Name = gig.Name;
+            this.Surname = gig.Surname;
+            this.Email = gig.Email;
+
         }
 
     }

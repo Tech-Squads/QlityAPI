@@ -804,6 +804,26 @@ namespace Qlity.Controllers
                 return null;
             }
         }
+
+        //Getting gig by status of Accepted
+        [Route("GetGigbyProsalaccp/{id}")]
+        public IEnumerable<Gig> Getproposalaccept(string id, string be = "Accepted")
+        {
+            try
+            {
+
+                HttpResponseMessage res = new HttpResponseMessage(HttpStatusCode.OK);
+                return db.Gigs.Where(us => us.GiggerIDs == id && us.Gig_Status == be).ToList();
+
+
+            }
+            catch (Exception)
+            {
+
+                HttpResponseMessage res = new HttpResponseMessage(HttpStatusCode.InternalServerError);
+                return null;
+            }
+        }
         //Getting gig for requestor to accept or reject proposal
         [Route("GetGigbyProsalReq/{id}")]
         public IEnumerable<Gig> Getproposalreq(int id, string be = "Proposal")
