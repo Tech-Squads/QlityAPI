@@ -28,10 +28,13 @@ namespace Qlity.Models
         public string Date_Responded { get; set; }
         public string Commercial { get; set; }
 
+       
 
         public string Name { get; set; }
         public string Surname { get; set; }
         public string Email { get; set; }
+
+        public string cell_number { get; set; }
 
 
         public Gig()
@@ -63,8 +66,13 @@ namespace Qlity.Models
             this.Name = gig.Name;
             this.Surname = gig.Surname;
             this.Email = gig.Email;
+            this.cell_number = gig.cell_number;
 
         }
 
     }
 }
+
+
+
+

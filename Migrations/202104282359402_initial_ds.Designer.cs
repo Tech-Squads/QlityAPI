@@ -7,13 +7,13 @@ namespace Qlity.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.4.4")]
-    public sealed partial class initial_repod_to : IMigrationMetadata
+    public sealed partial class initial_ds : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(initial_repod_to));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(initial_ds));
         
         string IMigrationMetadata.Id
         {
-            get { return "202104282047023_initial_repod_to"; }
+            get { return "202104282359402_initial_ds"; }
         }
         
         string IMigrationMetadata.Source

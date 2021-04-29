@@ -97,9 +97,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202104282047023_initial_repod_to.cs" />
-    <Compile Include="Migrations\202104282047023_initial_repod_to.designer.cs">
-      <DependentUpon>202104282047023_initial_repod_to.cs</DependentUpon>
+    <Compile Include="Migrations\202104282359402_initial_ds.cs" />
+    <Compile Include="Migrations\202104282359402_initial_ds.designer.cs">
+      <DependentUpon>202104282359402_initial_ds.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Gig.cs" />
@@ -119,8 +119,8 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202104282047023_initial_repod_to.resx">
-      <DependentUpon>202104282047023_initial_repod_to.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202104282359402_initial_ds.resx">
+      <DependentUpon>202104282359402_initial_ds.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
