@@ -842,6 +842,130 @@ namespace Qlity.Controllers
                 HttpResponseMessage res = new HttpResponseMessage(HttpStatusCode.InternalServerError);
                 return null;
             }
+
+
+
+
+        }
+        //Getting gig by status of rejected gigger
+        [Route("GetGigbyProsrejected/{id}")]
+        public IEnumerable<Gig> Getproposalrejected(string id, string be = "Rejected")
+        {
+            try
+            {
+
+                HttpResponseMessage res = new HttpResponseMessage(HttpStatusCode.OK);
+                return db.Gigs.Where(us => us.GiggerIDs == id && us.Gig_Status == be).ToList();
+
+
+            }
+            catch (Exception)
+            {
+
+                HttpResponseMessage res = new HttpResponseMessage(HttpStatusCode.InternalServerError);
+                return null;
+            }
+        }
+        //Getting giggerrejected gigs for requestor
+        [Route("GetGigbyProsalReqrejected/{id}")]
+        public IEnumerable<Gig> Getproposalreqrejected(int id, string be = "Rejected")
+        {
+            try
+            {
+
+                HttpResponseMessage res = new HttpResponseMessage(HttpStatusCode.OK);
+                return db.Gigs.Where(us => us.RequestorID == id && us.Gig_Status == be).ToList();
+
+
+            }
+            catch (Exception)
+            {
+
+                HttpResponseMessage res = new HttpResponseMessage(HttpStatusCode.InternalServerError);
+                return null;
+            }
+        }
+
+
+        //Getting gigger accepted gigs for requestor
+        [Route("GetGigbyProsalReqaccepted/{id}")]
+        public IEnumerable<Gig> Getproposalreqaccepted(int id, string be = "Accepted")
+        {
+            try
+            {
+
+                HttpResponseMessage res = new HttpResponseMessage(HttpStatusCode.OK);
+                return db.Gigs.Where(us => us.RequestorID == id && us.Gig_Status == be).ToList();
+
+
+            }
+            catch (Exception)
+            {
+
+                HttpResponseMessage res = new HttpResponseMessage(HttpStatusCode.InternalServerError);
+                return null;
+            }
+        }
+
+        //Getting gigger closed gigs for requestor
+        [Route("GetGigbyProsalReqaClosed/{id}")]
+        public IEnumerable<Gig> Getproposalreqaclosed(int id, string be = "Closed")
+        {
+            try
+            {
+
+                HttpResponseMessage res = new HttpResponseMessage(HttpStatusCode.OK);
+                return db.Gigs.Where(us => us.RequestorID == id && us.Gig_Status == be).ToList();
+
+
+            }
+            catch (Exception)
+            {
+
+                HttpResponseMessage res = new HttpResponseMessage(HttpStatusCode.InternalServerError);
+                return null;
+            }
+        }
+
+
+        //Getting gig by status of running gis
+        [Route("GetGigbyProsrunnin/{id}")]
+        public IEnumerable<Gig> Getproposalrunning(string id, string be = "Running")
+        {
+            try
+            {
+
+                HttpResponseMessage res = new HttpResponseMessage(HttpStatusCode.OK);
+                return db.Gigs.Where(us => us.GiggerIDs == id && us.Gig_Status == be).ToList();
+
+
+            }
+            catch (Exception)
+            {
+
+                HttpResponseMessage res = new HttpResponseMessage(HttpStatusCode.InternalServerError);
+                return null;
+            }
+        }
+
+        //Getting gig by status of completed gigs
+        [Route("GetGigbyProscompleted/{id}")]
+        public IEnumerable<Gig> Getproposalcompleted(string id, string be = "Completed")
+        {
+            try
+            {
+
+                HttpResponseMessage res = new HttpResponseMessage(HttpStatusCode.OK);
+                return db.Gigs.Where(us => us.GiggerIDs == id && us.Gig_Status == be).ToList();
+
+
+            }
+            catch (Exception)
+            {
+
+                HttpResponseMessage res = new HttpResponseMessage(HttpStatusCode.InternalServerError);
+                return null;
+            }
         }
     }
 }
